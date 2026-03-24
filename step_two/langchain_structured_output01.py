@@ -22,7 +22,7 @@ class AgentResponse(BaseModel):
     """agent 用来返回结果的结构"""
 
     answer: str = Field(description="agent的回答")
-    source: List[Sourse] = Field(default_factory=list, description="信息来源列表")
+    sources: List[Sourse] = Field(default_factory=list, description="信息来源列表")
 
 
 tools = [TavilySearch()]
