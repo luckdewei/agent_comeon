@@ -17,7 +17,10 @@ MODEL = "qwen3:1.7b"
 
 @tool
 def get_product_price(product: str) -> float:
-    """在产品目录中查找某件产品的价格"""
+    """
+    产品目录工具
+    在产品目录中查找某件产品的价格
+    """
     print(f"    >> get_product_price(product='{product}')")
     prices = {"笔记本电脑": 1299.99, "耳机": 149.95, "键盘": 89.50}
     return prices.get(product, 0)
@@ -25,8 +28,11 @@ def get_product_price(product: str) -> float:
 
 @tool
 def apply_discount(price: float, discount_tier: str) -> float:
-    """根据等级计算折扣，并返回最终价格。
-    可用等级：青铜、白银、黄金。"""
+    """
+    折扣计算工具
+    根据等级计算折扣，并返回最终价格。
+    可用等级：青铜、白银、黄金。
+    """
     print(f"    >> apply_discount(price={price}, discount_tier='{discount_tier}')")
     discount_percentages = {"青铜": 5, "白银": 12, "黄金": 23}
     discount = discount_percentages.get(discount_tier, 0)
@@ -103,4 +109,4 @@ def run_agent(question: str):
 if __name__ == "__main__":
     print("Hello LangChain Agent (.bind_tools)!")
     print()
-    result = run_agent("白银等级购买笔记本电脑的价格是多少？")
+    result = run_agent("钻石等级购买笔记本电脑的价格是多少？")
