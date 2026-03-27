@@ -76,12 +76,6 @@ tools_for_llm = [
 ]
 
 
-tools = {
-    "get_product_price": get_product_price,
-    "apply_discount": apply_discount,
-}
-
-
 @traceable(name="Ollama Chat", run_type="llm")
 def ollama_chat_traced(messages):
     return ollama.chat(model=MODEL, tools=tools_for_llm, messages=messages)
