@@ -20,7 +20,7 @@ embeddings = OpenAIEmbeddings(
     model="Qwen/Qwen3-Embedding-4B",
     dimensions=1536,
 )
-llm = ChatOpenAI(base_url=BASE_URL, model="moonshotai/Kimi-K2.5")
+llm = ChatOpenAI(base_url=BASE_URL, model="deepseek-ai/DeepSeek-R1-Distill-Qwen-7B")
 
 vectorstore = PineconeVectorStore(
     index_name=os.environ["INDEX_NAME"], embedding=embeddings
@@ -93,7 +93,11 @@ def create_retrieval_chain_with_lcel():
     """
     retrieval_chain = (
         RunnablePassthrough.assign(
-            context=itemgetter("question") | retriever | format_docs
+            # 这样写就好理解了
+            # 1. 先从 {"question": query} 中获取到 query 传给 retriever 得到回复的 docs 再传给 format_docs
+            # 进行格式化
+            # 2. 再将格式化后的数据拼接到原来的数据中得到 {"question": query, "content": "..."}
+            context=(itemgetter[str]("question") | retriever | format_docs)
         )
         | prompt_template
         | llm
