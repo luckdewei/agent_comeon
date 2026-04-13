@@ -13,5 +13,6 @@ dependencies = [
     "langchain-openai>=1.1.11",
     "langchain-pinecone>=0.2.13",
     "langchain-tavily>=0.2.17",
+    "langgraph>=1.1.3",
     "tavily-python>=0.7.23",
 ]
